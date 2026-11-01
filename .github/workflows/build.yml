@@ -1,0 +1,14 @@
+name: build-psp
+on: [push, workflow_dispatch]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: pspdev/pspdev:latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build EBOOT.PBP
+        run: make
+      - uses: actions/upload-artifact@v4
+        with:
+          name: BulletSlice
+          path: EBOOT.PBP
